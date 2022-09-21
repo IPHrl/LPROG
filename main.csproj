@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Projeto Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp6.0</TargetFramework>
-		<StartupObject>Program</StartupObject>
-  </PropertyGroup>
+  <Grupo de propriedades>
+    <Tipo de saída> Exe </Tipo de saída>
+    <TargetFramework> netcoreapp6.0 </TargetFramework>
+		<StartupObject> Aula4 </StartupObject>
+  </Grupo de propriedades>
 
-</Project>
+</Projeto>
