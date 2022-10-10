@@ -1,67 +1,73 @@
 namespace Modelos {
 
-  classe Pessoa {
+abstract class Pessoa {
 
-    privado string cpf;
-
-    público string Cpf {
-      obter = > isto.cpf;
-      conjunto {
-        se (Validar(valor) ) {
-          isto.cpf = valor;
-        }
-      }
+private string cpf;
+  
+public string Cpf {
+  get => this.cpf;
+  set {
+    if (Validar(value)) {
+        this.cpf = value;
     }
-
-    público estático bool Validar(string cpf) {
-      int[ ] multiplicador1 = novo int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-  		int[ ] multiplicador2 = novo int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
-  		string tempCpf;
-  		string digito;
-  		int soma;
-  		int resto;
-  
-  		cpf = cpf.Aparar( );
-  		cpf = cpf.Substituir(".", "").Substituir("-", "");
-  
-  		se (cpf.Comprimento != 11)
-  		   Retorna falso;
-  
-  		tempCpf = cpf.Substringir(0, 9);
-  		soma = 0;
-  
-  		para(int eu=0; eu<9; eu+ +)
-  		    soma + = int.Parse(tempCpf[eu].ToString( ) ) * multiplicador1[eu];
-  
-  		resto = soma % 11;
-  		se ( resto < 2 )
-  		    resto = 0;
-  		mais
-  		   resto = 11 - resto;
-  
-  		digito = resto.ToString( );
-  
-  		tempCpf = tempCpf + digito;
-  
-  		soma = 0;
-  		para(int eu=0; eu<10; eu+ +)
-  		    soma + = int.Parse(tempCpf[eu].ToString( ) ) * multiplicador2[eu];
-  
-  		resto = soma % 11;
-  		se (resto < 2)
-  		   resto = 0;
-  		mais
-  		   resto = 11 - resto;
-  
-  		digito = digito + resto.ToString( );
-  
-  		Retorna cpf.Termina com(digito);
-    }
-
-    público string Nome {
-      obter; conjunto;
-    }
-    
   }
+}
+
+public abstract bool Validar();
+
+public static bool Validar(string cpf)  {
+  
+  int[] multiplicador1 = new int[9] { 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+      int[] multiplicador2 = new int[10] { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
+      string tempCpf;
+      string digito;
+      int soma;
+      int resto;
+
+      cpf = cpf.Trim();
+      cpf = cpf.Replace(".", "").Replace("-", "");
+ 
+      if (cpf.Length != 11)
+          return false;
+
+     tempCpf = cpf.Substring(0, 9);
+     soma = 0;
+
+     for (int i = 0; i < 9; i++)
+          soma += int.Parse(tempCpf[i].ToString()) * multiplicador1[i];
+
+          resto = soma % 11;
+
+          if (resto < 2)
+              resto = 0;
+          else
+              resto = 11 - resto;
+
+          digito = resto.ToString();
+
+          tempCpf = tempCpf + digito;
+
+          soma = 0;
+
+          for (int i = 0; i < 10; i++)
+                soma += int.Parse(tempCpf[i].ToString()) * multiplicador2[i];
+
+          resto = soma % 11;
+  
+          if (resto < 2)
+                resto = 0;
+          else
+                resto = 11 - resto;
+
+          digito = digito + resto.ToString();
+
+          return cpf.EndsWith(digito);
+}
+  
+public string Nome {
+get; set; 
+}
+  
+}
   
 }
